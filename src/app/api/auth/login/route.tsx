@@ -4,8 +4,6 @@ import { sql } from "@/lib/db";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET!;
-
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
 
@@ -14,7 +12,7 @@ export async function POST(req: NextRequest) {
   }
 
   const users = await sql`
-    SELECT id, name, email, password
+    SELECT id, name, email, password_hash
     FROM users
     WHERE email = ${email}
     LIMIT 1
@@ -26,14 +24,18 @@ export async function POST(req: NextRequest) {
 
   const user = users[0];
 
-  const valid = await bcrypt.compare(password, user.password);
+  const valid = await bcrypt.compare(password, user.password_hash);
   if (!valid) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
-  const token = jwt.sign({ sub: user.id, email: user.email }, JWT_SECRET, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign(
+    { sub: user.id, email: user.email },
+    process.env.JWT_SECRET!,
+    {
+      expiresIn: "1d",
+    },
+  );
 
   const res = NextResponse.json({
     message: "Login successful",
