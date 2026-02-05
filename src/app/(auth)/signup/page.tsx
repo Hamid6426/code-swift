@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
-import { api } from "@/lib/api";
 
 export default function SignUpPage() {
   const [signupForm, setSignupForm] = useState<{
@@ -33,7 +32,20 @@ export default function SignUpPage() {
     setLoading(true);
 
     try {
-      await api.post("/auth/signup", signupForm);
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signupForm),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || "Signup failed");
+        return;
+      }
 
       toast.success("Registered successfully. Please login.");
       setSignupForm({ name: "", email: "", password: "" });

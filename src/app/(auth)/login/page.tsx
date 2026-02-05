@@ -6,7 +6,6 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { api } from "@/lib/api";
 import { useAuthStore } from "@/store";
 
 export default function LoginPage() {
@@ -27,9 +26,22 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const res = await api.post("/auth/login", loginForm, {  maxRedirects: 0,}); 
-      setUser(res.data.user);
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginForm),
+      });
 
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.error || "Login failed");
+        return;
+      }
+
+      setUser(data.user);
       toast.success("Login successful!");
       setLoginForm({ email: "", password: "" });
       router.push("/dashboard");

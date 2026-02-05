@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { api } from "@/lib/api";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { AuthState, UIState } from "@/store/states";
 
@@ -9,7 +8,10 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   logout: async () => {
     try {
-      await api.post("/auth/logout");
+      await fetch("/api/auth/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
     } finally {
       set({ user: null });
     }

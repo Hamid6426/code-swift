@@ -13,7 +13,7 @@ export default function VideoDisplay({
   const mutedImage = "/video-off.png"; // optional static image when video off
 
   return (
-    <div className="w-full aspect-video bg-color-surface border border-color-surface-border rounded-lg mb-4 flex items-center justify-center">
+    <div className="w-full max-w-3xl aspect-video bg-color-surface border border-color-surface-border rounded-lg mb-4 flex items-center justify-center">
       {callStatus === "idle" && (
         <p className="text-color-on-surface">Call not started</p>
       )}
