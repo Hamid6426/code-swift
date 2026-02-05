@@ -17,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 right-0 px-2 w-full h-14 bg-surface flex items-center justify-between">
+    <header className="sticky top-0 right-0 px-2 py-2 w-full h-14 bg-surface flex items-center justify-between">
       <button
         type="button"
         onClick={toggleSidebar}

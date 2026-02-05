@@ -18,7 +18,7 @@ export default function Sidebar({ items }: Props) {
   return (
     <aside
       className={clsx(
-        "sticky top-0 left-0 h-dvh bg-surface border-r border-outline flex flex-col pb-2 px-2 transition-all duration-200",
+        "fixed md:sticky top-0 left-0 h-dvh bg-surface border-r border-outline flex flex-col pb-2 px-2 transition-all duration-200",
         sidebarCollapsed ? "w-14" : "w-48",
       )}
     >
