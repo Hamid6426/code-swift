@@ -1,6 +1,7 @@
 import ViewToggle from "@/components/ViewToggle";
 import type { User } from "@/types/user.type";
 import { sql } from "@/lib/db";
+import { Search } from "lucide-react";
 
 interface UsersPageProps {
   searchParams: { search?: string; page?: string };
@@ -67,13 +68,13 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
             type="text"
             defaultValue={search}
             placeholder="Search users..."
-            className="border p-2 w-full rounded-md"
+            className="border p-2 w-full rounded-md bg-container text-on-container"
           />
           <button
             type="submit"
-            className="px-4 py-2 border rounded-md bg-primary text-white"
+            className="px-4 py-2 border rounded-md bg-primary text-on-primary"
           >
-            Search
+            <Search />
           </button>
         </form>
 

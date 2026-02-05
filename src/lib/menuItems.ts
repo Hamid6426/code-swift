@@ -7,6 +7,7 @@ import {
   LucideIcon,
   MessageCircleMore,
   Video,
+  Bell,
 } from "lucide-react";
 
 export const iconMap: Record<string, LucideIcon> = {
@@ -15,6 +16,7 @@ export const iconMap: Record<string, LucideIcon> = {
   Settings,
   MessageCircleMore,
   Video,
+  Bell,
 };
 
 export const sidebarMenuItems: SidebarItem[] = [
@@ -45,5 +47,12 @@ export const sidebarMenuItems: SidebarItem[] = [
     title: "Video Call",
     link: "/video-call",
     icon: "Video",
+  },
+  {
+    id: 5,
+    orderSequence: 5,
+    title: "Notifications",
+    link: "/notifications",
+    icon: "Bell",
   },
 ];

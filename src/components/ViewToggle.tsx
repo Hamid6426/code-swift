@@ -2,6 +2,7 @@
 import { useState } from "react";
 import type { User } from "@/types/user.type";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight, Grid, Table } from "lucide-react";
 
 interface ViewToggleProps {
   users: User[];
@@ -27,16 +28,16 @@ export default function ViewToggle({
         <div className="text-on-surface font-bold text-2xl">Users</div>
         <div className="flex gap-2">
           <button
-            className={`px-4 py-2 border rounded-md ${view === "grid" ? "bg-primary text-white" : "text-on-surface"}`}
+            className={`px-4 py-2 border rounded-md ${view === "grid" ? "bg-primary text-on-primary" : "text-on-surface"}`}
             onClick={() => setView("grid")}
           >
-            Grid
+            <Grid/>
           </button>
           <button
-            className={`px-4 py-2 border rounded-md ${view === "table" ? "bg-primary text-white" : "text-on-surface"}`}
+            className={`px-4 py-2 border rounded-md ${view === "table" ? "bg-primary text-on-primary" : "text-on-surface"}`}
             onClick={() => setView("table")}
           >
-            Table
+            <Table/>
           </button>
         </div>
       </div>
@@ -94,18 +95,18 @@ export default function ViewToggle({
       <div className="flex justify-between mt-4">
         <Link
           href={`/users?search=${search}&page=${Math.max(pageNumber - 1, 1)}`}
-          className={`px-4 py-2 text-sm font-medium border rounded-md ${pageNumber === 1 ? "opacity-50 pointer-events-none" : ""}`}
+          className={`px-4 py-2 flex items-center text-sm font-medium border rounded-md ${pageNumber === 1 ? "opacity-50 pointer-events-none" : ""}`}
         >
-          Previous
+          <ChevronLeft /> <span>Previous</span>
         </Link>
         <span className="text-sm text-on-surface">
           Page {pageNumber} of {Math.ceil(total / pageSize)}
         </span>
         <Link
           href={`/users?search=${search}&page=${pageNumber + 1}`}
-          className={`px-4 py-2 text-sm font-medium border rounded-md ${pageNumber * pageSize >= total ? "opacity-50 pointer-events-none" : ""}`}
+          className={`px-4 py-2 flex items-center text-sm font-medium border rounded-md ${pageNumber * pageSize >= total ? "opacity-50 pointer-events-none" : ""}`}
         >
-          Next
+          <span>Next</span> <ChevronRight />
         </Link>
       </div>
     </div>

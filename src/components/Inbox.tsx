@@ -53,15 +53,12 @@ export default function Inbox({ friendId }: { friendId: number }) {
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`max-w-[85%] md:max-w-[70%] p-3 rounded-lg shadow-sm text-sm ${
+            className={`max-w-60 w-full p-2 rounded-lg shadow-sm text-sm ${
               msg.from === userName
                 ? "self-end bg-primary text-on-primary rounded-tr-none"
                 : "self-start bg-container text-on-container border border-container-border rounded-tl-none"
             }`}
           >
-            <div className="font-bold text-[10px] mb-1 opacity-70 uppercase tracking-tight">
-              {msg.from}
-            </div>
             <div className="wrap-break-words leading-relaxed">
               {msg.subject}
             </div>
