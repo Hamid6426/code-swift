@@ -29,6 +29,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
+  if (!process.env.JWT_SECRET) {
+    return NextResponse.json(
+      { error: "Server misconfigured" },
+      { status: 500 },
+    );
+  }
+
   const token = jwt.sign(
     { sub: user.id, email: user.email, name: user.name },
     process.env.JWT_SECRET!,
@@ -42,11 +49,13 @@ export async function POST(req: NextRequest) {
     user: { id: user.id, name: user.name, email: user.email },
   });
 
+  const isProd = process.env.NODE_ENV === "production";
+
   res.cookies.set({
     name: "auth_token",
     value: token,
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isProd,
     sameSite: "lax",
     path: "/",
     maxAge: 60 * 60 * 24,

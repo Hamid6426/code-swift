@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
+import { useAuthStore } from "@/store";
 
 export default function LoginPage() {
   const [loginForm, setLoginForm] = useState<{
@@ -15,6 +16,7 @@ export default function LoginPage() {
   }>({ email: "", password: "" });
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
+  const setUser = useAuthStore((s) => s.setUser);
 
   const handleChange = (field: "email" | "password", value: string) => {
     setLoginForm((prev) => ({ ...prev, [field]: value }));
@@ -25,7 +27,9 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await api.post("/api/auth/login", loginForm);
+      const res = await api.post("/auth/login", loginForm, {  maxRedirects: 0,}); 
+      setUser(res.data.user);
+
       toast.success("Login successful!");
       setLoginForm({ email: "", password: "" });
       router.push("/dashboard");

@@ -33,7 +33,7 @@ export default function SignUpPage() {
     setLoading(true);
 
     try {
-      await api.post("/api/auth/signup", signupForm);
+      await api.post("/auth/signup", signupForm);
 
       toast.success("Registered successfully. Please login.");
       setSignupForm({ name: "", email: "", password: "" });

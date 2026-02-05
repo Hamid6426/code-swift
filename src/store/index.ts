@@ -5,8 +5,14 @@ import { api } from "@/lib/api";
 interface AuthState {
   user: User | null;
   setUser: (user: User | null) => void;
-  
+
   logout: () => Promise<void>;
+}
+
+interface UIState {
+  sidebarCollapsed: boolean;
+  toggleSidebar: () => void;
+  collapseSidebar: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -15,10 +21,15 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   logout: async () => {
     try {
-      await api.post("/api/auth/logout");
+      await api.post("/auth/logout");
+    } finally {
       set({ user: null });
-    } catch (err) {
-      console.error("Logout failed", err);
     }
   },
+}));
+
+export const useUIStore = create<UIState>((set) => ({
+  sidebarCollapsed: false,
+  toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+  collapseSidebar: () => set({ sidebarCollapsed: true }),
 }));
