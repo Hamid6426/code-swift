@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import type { User } from "@/types/user.type";
 import { api } from "@/lib/api";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface AuthState {
   user: User | null;
@@ -28,8 +29,17 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 }));
 
-export const useUIStore = create<UIState>((set) => ({
-  sidebarCollapsed: false,
-  toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
-  collapseSidebar: () => set({ sidebarCollapsed: true }),
-}));
+export const useUIStore = create<UIState>()(
+  persist(
+    (set) => ({
+      sidebarCollapsed: false,
+      toggleSidebar: () =>
+        set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+      collapseSidebar: () => set({ sidebarCollapsed: true }),
+    }),
+    {
+      name: "ui-store", // localStorage key
+      storage: createJSONStorage(() => localStorage), // default is localStorage
+    },
+  ),
+);

@@ -15,7 +15,7 @@ import type { NextRequest } from "next/server";
  * - Excludes static assets (_next/static, _next/image) and favicon from middleware.
  */
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const token = req.cookies.get("auth_token"); // your auth cookie/session key
   const { pathname } = req.nextUrl;
 

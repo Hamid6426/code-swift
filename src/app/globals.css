@@ -141,3 +141,47 @@ body {
   color: var(--on-background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Thin custom scrollbar using your theme colors */
+
+/* Light Mode */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 9999px;
+  border: 1px solid var(--color-surface);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-surface);
+}
+
+/* Dark Mode Overrides */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: var(--surface);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--primary);
+    border: 1px solid var(--surface);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-hover);
+  }
+
+  * {
+    scrollbar-color: var(--primary) var(--surface);
+  }
+}

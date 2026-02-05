@@ -28,18 +28,26 @@ export default function Sidebar({ items }: Props) {
   return (
     <aside
       className={clsx(
-        "h-dvh bg-surface border-r border-surface-border flex flex-col pb-2 px-2 transition-all duration-200",
-        sidebarCollapsed ? "w-14" : "w-48"
+        "sticky top-0 left-0 h-dvh bg-surface border-r border-surface-border flex flex-col pb-2 px-2 transition-all duration-200",
+        sidebarCollapsed ? "w-14" : "w-48",
       )}
     >
       <div className="flex items-center h-14 border-b border-surface-border px-3 text-xl font-bold">
-        {!sidebarCollapsed ? <div className="relative flex">
-          <div className="text-primary">Code&nbsp;&nbsp;</div>
-          <div className="text-success ">Swift</div>
-          </div> : <div className="relative">
-          <div className="text-primary translate-y-4 -translate-x-1 text-3xl">C</div>
-          <div className="text-success -translate-y-2 translate-x-2 text-3xl">S</div>
-          </div>}
+        {!sidebarCollapsed ? (
+          <div className="relative flex">
+            <div className="text-primary">Code&nbsp;&nbsp;</div>
+            <div className="text-success ">Swift</div>
+          </div>
+        ) : (
+          <div className="relative">
+            <div className="text-primary translate-y-4 -translate-x-1 text-3xl">
+              C
+            </div>
+            <div className="text-success -translate-y-2 translate-x-2 text-3xl">
+              S
+            </div>
+          </div>
+        )}
       </div>
 
       <nav className="flex flex-col gap-2 mt-2">
