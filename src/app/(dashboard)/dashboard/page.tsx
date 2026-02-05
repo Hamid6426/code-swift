@@ -17,7 +17,7 @@ export default function DashboardPage() {
             ))}
           </div>
           <Link
-            href="/friends"
+            href="/users"
             className="mt-4 text-center py-2 text-sm font-medium text-on-ghost bg-ghost hover:bg-ghost-hover border border-ghost-border rounded transition"
           >
             Show all
