@@ -4,12 +4,12 @@ import { LogOut, Menu } from "lucide-react";
 import { useAuthStore } from "@/store";
 import { useUIStore } from "@/store";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Header() {
   const logout = useAuthStore((s) => s.logout);
   const toggleSidebar = useUIStore((s) => s.toggleSidebar);
   const router = useRouter();
-
 
   const handleLogout = async () => {
     await logout();
@@ -25,13 +25,16 @@ export default function Header() {
       >
         <Menu size={20} />
       </button>
-    <button
-      type="button"
-      onClick={handleLogout}
-      className="inline-flex cursor-pointer bg-error text-on-error px-4 py-2 rounded-md shadow-sm hover:bg-error-hover focus:ring-2 focus:ring-error-border transition disabled:opacity-70 disabled:cursor-not-allowed"
-    >
-        <LogOut size={20} />
-    </button>
+      <div className="flex items-center gap-3">
+        <ThemeToggle />
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="inline-flex cursor-pointer bg-error text-on-error px-4 py-2 rounded-md shadow-sm hover:bg-error-hover focus:ring-2 focus:ring-error-border transition disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          <LogOut size={20} />
+        </button>
+      </div>
     </header>
   );
 }
