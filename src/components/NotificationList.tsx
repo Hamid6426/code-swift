@@ -105,7 +105,10 @@ export default function NotificationList({
               <Icon className={`${colorClass} w-5 h-5`} />
               <div>
                 <p className="font-semibold text-on-surface">{n.title}</p>
-                <p className="text-sm text-on-surface/70">
+                <p
+                  className="text-sm text-on-surface/70"
+                  suppressHydrationWarning
+                >
                   {new Date(n.createdAt).toLocaleString()}
                 </p>
               </div>
