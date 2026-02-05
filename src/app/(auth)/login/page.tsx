@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { api } from "@/lib/api";
 
 export default function LoginPage() {
   const [loginForm, setLoginForm] = useState<{
@@ -25,7 +25,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      await axios.post("/api/auth/login", loginForm);
+      await api.post("/api/auth/login", loginForm);
       toast.success("Login successful!");
       setLoginForm({ email: "", password: "" });
       router.push("/dashboard");

@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import Link from "next/link";
+import { api } from "@/lib/api";
 
 export default function SignUpPage() {
   const [signupForm, setSignupForm] = useState<{
@@ -33,7 +33,7 @@ export default function SignUpPage() {
     setLoading(true);
 
     try {
-      await axios.post("/api/auth/signup", signupForm);
+      await api.post("/api/auth/signup", signupForm);
 
       toast.success("Registered successfully. Please login.");
       setSignupForm({ name: "", email: "", password: "" });
