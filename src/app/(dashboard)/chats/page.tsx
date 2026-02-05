@@ -4,7 +4,7 @@ import { useState } from "react";
 import Inbox from "@/components/Inbox";
 import { userStats } from "@/lib/dashboardData";
 import Image from "next/image";
-import { CircleChevronLeft } from "lucide-react";
+import { CircleChevronLeft, PenSquareIcon } from "lucide-react";
 
 export default function ChatsPage() {
   const [selectedFriendId, setSelectedFriendId] = useState<number | null>(null);
@@ -86,14 +86,8 @@ export default function ChatsPage() {
           </>
         ) : (
           <div className="flex-1 flex items-center justify-center text-on-container/50">
-            <div className="text-center">
-              <Image
-                width={400}
-                height={400}
-                src="/placeholder-chat.svg"
-                alt="Select a friend"
-                className="mx-auto mb-4 w-24 h-24"
-              />
+            <div className="flex flex-col gap-2 md:gap-4 justify-center items-center">
+              <PenSquareIcon className="size-4 md:size-12" />
               <p className="text-sm">Select a friend to start chatting</p>
             </div>
           </div>
