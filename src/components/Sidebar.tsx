@@ -2,25 +2,14 @@
 
 import Link from "next/link";
 import { SidebarItem } from "@/types/sidebar.type";
-import {
-  Home,
-  Users,
-  Settings,
-  LucideIcon,
-  ListCollapseIcon,
-} from "lucide-react";
+import { ListCollapseIcon } from "lucide-react";
 import { useUIStore } from "@/store";
 import clsx from "clsx";
+import { iconMap } from "@/lib/menuItems";
 
 interface Props {
   items: SidebarItem[];
 }
-
-export const iconMap: Record<string, LucideIcon> = {
-  Home,
-  Users,
-  Settings,
-};
 
 export default function Sidebar({ items }: Props) {
   const { sidebarCollapsed, toggleSidebar } = useUIStore();

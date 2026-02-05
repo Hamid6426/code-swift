@@ -1,5 +1,5 @@
 export interface SidebarItem {
-  id: string;
+  id: number;
   orderSequence: number;
   title: string;
   link: string;
