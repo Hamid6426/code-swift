@@ -12,7 +12,7 @@ export default function DashboardLayout({
       <Sidebar items={sidebarMenuItems} />
       <div className="flex-1 flex flex-col min-h-dvh overflow-y-auto">
         <Header />
-        <div className="flex-1">{children}</div>
+        <div className="flex-1 ml-14 md:ml-0">{children}</div>
       </div>
     </div>
   );
