@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Inbox from "@/components/Inbox";
 import { userStats } from "@/lib/dashboardData";
-import Image from "next/image";
 import { CircleChevronLeft, PenSquareIcon } from "lucide-react";
 
 export default function ChatsPage() {
