@@ -48,50 +48,89 @@ export default function CallControls({
   );
 
   return (
-    <div className="flex flex-row md:flex-col w-full h-16 md:pt-0 justify-center items-center md:h-full md:w-16 md:pl-4 gap-4 md:my-auto">
+    <div className="flex flex-row flex-wrap md:flex-col w-full h-16 md:pt-0 justify-center items-center md:h-full md:w-16 md:pl-4 gap-2 md:gap-4 md:my-auto">
       {/* Start Call */}
-      {iconBtn(
-        <Phone size={24} />,
-        "bg-primary text-color-on-primary",
-        onStart,
-        callStatus !== "idle",
-      )}
+      <Tooltip label="Start call">
+        {iconBtn(
+          <Phone className="size-4 md:size-6" />,
+          "bg-primary text-color-on-primary",
+          onStart,
+          callStatus !== "idle",
+        )}
+      </Tooltip>
 
-      {/* Mute/Unmute */}
-      {iconBtn(
-        muted ? <MicOff size={24} /> : <Mic size={24} />,
-        muted
-          ? "bg-error text-color-on-error"
-          : "bg-success text-color-on-success",
-        onMuteToggle,
-        callStatus !== "connected",
-      )}
+      {/* Mute / Unmute */}
+      <Tooltip label={muted ? "Unmute" : "Mute"}>
+        {iconBtn(
+          muted ? (
+            <MicOff className="size-4 md:size-6" />
+          ) : (
+            <Mic className="size-4 md:size-6" />
+          ),
+          muted
+            ? "bg-error text-color-on-error"
+            : "bg-success text-color-on-success",
+          onMuteToggle,
+          callStatus !== "connected",
+        )}
+      </Tooltip>
 
       {/* Video Toggle */}
-      {iconBtn(
-        videoOn ? <Video size={24} /> : <VideoOff size={24} />,
-        videoOn
-          ? "bg-success text-color-on-success"
-          : "bg-error text-color-on-error",
-        onVideoToggle,
-        callStatus !== "connected",
-      )}
+      <Tooltip label={videoOn ? "Turn video off" : "Turn video on"}>
+        {iconBtn(
+          videoOn ? (
+            <Video className="size-4 md:size-6" />
+          ) : (
+            <VideoOff className="size-4 md:size-6" />
+          ),
+          videoOn
+            ? "bg-success text-color-on-success"
+            : "bg-error text-color-on-error",
+          onVideoToggle,
+          callStatus !== "connected",
+        )}
+      </Tooltip>
 
       {/* End Call */}
-      {iconBtn(
-        <X size={24} />,
-        "bg-error text-color-on-error",
-        onEnd,
-        callStatus !== "connected",
-      )}
+      <Tooltip label="End call">
+        {iconBtn(
+          <X className="size-4 md:size-6" />,
+          "bg-error text-color-on-error",
+          onEnd,
+          callStatus !== "connected",
+        )}
+      </Tooltip>
 
       {/* Reset */}
-      {iconBtn(
-        <RefreshCw size={24} />,
-        "bg-primary text-color-on-primary",
-        onReset,
-        callStatus !== "ended",
-      )}
+      <Tooltip label="Reset">
+        {iconBtn(
+          <RefreshCw className="size-4 md:size-6" />,
+          "bg-primary text-color-on-primary",
+          onReset,
+          callStatus !== "ended",
+        )}
+      </Tooltip>
+    </div>
+  );
+}
+
+function Tooltip({
+  label,
+  children,
+}: {
+  label: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="relative group">
+      {children}
+      <div
+        className="pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-full mb-2
+        whitespace-nowrap rounded bg-black/80 px-2 py-1 text-xs text-white
+        opacity-0 group-hover:opacity-100 transition"
+      >
+        {label}
+      </div>
     </div>
   );
 }
