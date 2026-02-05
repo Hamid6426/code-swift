@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import VideoDisplay from "@/components/VideoDisplay";
 import CallControls from "@/components/CallControls";
-import CallStatus from "@/components/CallStatus";
 
 type CallStatusType = "idle" | "ringing" | "connected" | "ended";
 
