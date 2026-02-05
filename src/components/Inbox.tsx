@@ -4,12 +4,12 @@ import { ref, push, onValue } from "firebase/database";
 import { db } from "@/lib/firebase";
 import { useEffect, useState } from "react";
 import { Message } from "@/lib/dashboardData";
-import { getCookieData } from "@/lib/getCookieData";
+import { useCookieData } from "@/hooks/useCookieData";
 
 export default function Inbox({ friendId }: { friendId: number }) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
-  const userName = (getCookieData() ?? "Me") as string;
+  const userName = useCookieData() ?? "Me";
 
   useEffect(() => {
     const messagesRef = ref(db, `chats/${friendId}`);
