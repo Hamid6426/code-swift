@@ -1,20 +1,7 @@
 import { create } from "zustand";
-import type { User } from "@/types/user.type";
 import { api } from "@/lib/api";
 import { createJSONStorage, persist } from "zustand/middleware";
-
-interface AuthState {
-  user: User | null;
-  setUser: (user: User | null) => void;
-
-  logout: () => Promise<void>;
-}
-
-interface UIState {
-  sidebarCollapsed: boolean;
-  toggleSidebar: () => void;
-  collapseSidebar: () => void;
-}
+import { AuthState, UIState } from "@/store/states";
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
