@@ -18,17 +18,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 }));
 
-export const useUIStore = create<UIState>()(
-  persist(
-    (set) => ({
-      sidebarCollapsed: false,
-      toggleSidebar: () =>
-        set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
-      collapseSidebar: () => set({ sidebarCollapsed: true }),
-    }),
-    {
-      name: "ui-store", // localStorage key
-      storage: createJSONStorage(() => localStorage), // default is localStorage
-    },
-  ),
-);
+export const useUIStore = create<UIState>()((set) => ({
+  sidebarCollapsed: true,
+  toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),
+  collapseSidebar: () => set({ sidebarCollapsed: true }),
+}));

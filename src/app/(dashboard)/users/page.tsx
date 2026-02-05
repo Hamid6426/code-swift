@@ -61,31 +61,29 @@ export default async function UsersPage({ searchParams }: UsersPageProps) {
 
   return (
     <div className="p-4 bg-background min-h-screen rounded-md">
-      <div className="p-4">
-        <form method="get" className="mb-4 flex gap-2">
-          <input
-            name="search"
-            type="text"
-            defaultValue={search}
-            placeholder="Search users..."
-            className="border p-2 w-full rounded-md bg-container text-on-container"
-          />
-          <button
-            type="submit"
-            className="px-4 py-2 border rounded-md bg-primary text-on-primary"
-          >
-            <Search />
-          </button>
-        </form>
-
-        <ViewToggle
-          users={users}
-          search={search}
-          pageNumber={pageNumber}
-          pageSize={pageSize}
-          total={total}
+      <form method="get" className="mb-4 flex gap-2">
+        <input
+          name="search"
+          type="text"
+          defaultValue={search}
+          placeholder="Search users..."
+          className="border p-2 w-full rounded-md bg-container text-on-container"
         />
-      </div>
+        <button
+          type="submit"
+          className="px-4 py-2 border rounded-md bg-primary text-on-primary"
+        >
+          <Search />
+        </button>
+      </form>
+
+      <ViewToggle
+        users={users}
+        search={search}
+        pageNumber={pageNumber}
+        pageSize={pageSize}
+        total={total}
+      />
     </div>
   );
 }

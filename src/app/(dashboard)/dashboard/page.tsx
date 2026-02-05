@@ -1,3 +1,4 @@
+import FriendCard from "@/components/FriendCard";
 import { userStats, callLogs, messages } from "@/lib/dashboardData";
 import Link from "next/link";
 
@@ -11,17 +12,7 @@ export default function DashboardPage() {
           <div className="text-on-surface font-bold text-2xl mb-4">Friends</div>
           <div className="flex flex-col gap-4">
             {userStats.slice(0, 3).map((user) => (
-              <div
-                key={user.id}
-                className="h-24 p-4 rounded-md shadow-md bg-container hover:bg-container-hover border border-container-border transition cursor-pointer"
-                title={`Email: ${user.email}`}
-              >
-                <h4 className="font-semibold text-on-container">{user.name}</h4>
-                <p className="text-sm text-on-container/50">{user.email}</p>
-                <p className="text-sm text-on-container/70">
-                  Status: {user.status}
-                </p>
-              </div>
+              <FriendCard key={user.id} user={user} />
             ))}
           </div>
           <Link

@@ -1,3 +1,4 @@
+// src/components/Sidebar.tsx
 "use client";
 
 import Link from "next/link";
@@ -17,25 +18,15 @@ export default function Sidebar({ items }: Props) {
   return (
     <aside
       className={clsx(
-        "sticky top-0 left-0 h-dvh bg-surface border-r border-surface-border flex flex-col pb-2 px-2 transition-all duration-200",
+        "sticky top-0 left-0 h-dvh bg-surface border-r border-outline flex flex-col pb-2 px-2 transition-all duration-200",
         sidebarCollapsed ? "w-14" : "w-48",
       )}
     >
-      <div className="flex items-center h-14 border-b border-surface-border px-3 text-xl font-bold">
+      <div className="flex items-center h-14 text-xl font-black overflow-hidden">
         {!sidebarCollapsed ? (
-          <div className="relative flex">
-            <div className="text-primary">Code&nbsp;&nbsp;</div>
-            <div className="text-success ">Swift</div>
-          </div>
+          <div className="text-primary text-center w-full">Code Swift</div>
         ) : (
-          <div className="relative">
-            <div className="text-primary translate-y-4 -translate-x-1 text-3xl">
-              C
-            </div>
-            <div className="text-success -translate-y-2 translate-x-2 text-3xl">
-              S
-            </div>
-          </div>
+          <div className="text-primary relative flex flex-col items-center w-full">CS</div>
         )}
       </div>
 
@@ -56,10 +47,17 @@ export default function Sidebar({ items }: Props) {
         className="mt-auto flex items-center gap-3 px-3 py-2
                    text-on-surface
                    hover:bg-container-hover
-                   border border-container-border rounded-md"
+                   border border-outline rounded-md transition-colors"
       >
-        <ListCollapseIcon className="w-4 h-4" />
-        {!sidebarCollapsed && <span>Collapse Menu</span>}
+        <ListCollapseIcon
+          className={clsx(
+            "w-4 h-4 transition-transform",
+            !sidebarCollapsed && "rotate-180",
+          )}
+        />
+        {!sidebarCollapsed && (
+          <span className="whitespace-nowrap">Collapse Menu</span>
+        )}
       </button>
     </aside>
   );
@@ -80,10 +78,10 @@ function SidebarNode({
       className="flex items-center gap-3 px-3 py-2 rounded-md
                  text-on-surface
                  hover:bg-container-hover
-                 border border-container-border"
+                 border border-outline transition-colors"
     >
-      {Icon && <Icon className="h-4 w-4" />}
-      {!collapsed && <span>{item.title}</span>}
+      {Icon && <Icon className="h-4 w-4 shrink-0" />}
+      {!collapsed && <span className="whitespace-nowrap">{item.title}</span>}
     </Link>
   );
 }

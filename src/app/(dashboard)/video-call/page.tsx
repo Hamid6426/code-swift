@@ -85,7 +85,7 @@ export default function VideoCallPage() {
 
   return (
     <div className="bg-background flex h-full">
-      <div className="flex-1 flex flex-col md:flex-row bg-surface p-4">
+      <div className="flex-1 flex flex-col md:flex-row p-2 md:p-4">
         {/* Remote / main video */}
         <div className="flex-1 flex justify-center items-center relative">
           <VideoDisplay

@@ -3,6 +3,7 @@ import { useState } from "react";
 import type { User } from "@/types/user.type";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Grid, Table } from "lucide-react";
+import Image from "next/image";
 
 interface ViewToggleProps {
   users: User[];
@@ -31,13 +32,13 @@ export default function ViewToggle({
             className={`px-4 py-2 border rounded-md ${view === "grid" ? "bg-primary text-on-primary" : "text-on-surface"}`}
             onClick={() => setView("grid")}
           >
-            <Grid/>
+            <Grid />
           </button>
           <button
             className={`px-4 py-2 border rounded-md ${view === "table" ? "bg-primary text-on-primary" : "text-on-surface"}`}
             onClick={() => setView("table")}
           >
-            <Table/>
+            <Table />
           </button>
         </div>
       </div>
@@ -45,18 +46,31 @@ export default function ViewToggle({
       {/* Grid or Table */}
       {view === "grid" ? (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {users.map((user) => (
-            <div
-              key={user.id}
-              className="p-4 rounded-md border bg-surface shadow-sm"
-            >
-              <h4 className="font-semibold text-on-surface">{user.name}</h4>
-              <p className="text-sm text-gray-500 truncate">{user.email}</p>
-              <p className="text-xs text-gray-400">
-                {new Date(user.createdAt).toLocaleString()}
-              </p>
-            </div>
-          ))}
+          {users.map((user) => {
+            const firstLetter = user.name.charAt(0).toUpperCase();
+            return (
+              <div
+                key={user.id}
+                className="flex flex-col items-center justify-center p-4 rounded-md border bg-surface shadow-sm text-center"
+              >
+                {/* Avatar */}
+                <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold mb-3">
+                  {firstLetter}
+                </div>
+
+                {/* Name */}
+                <h4 className="font-semibold text-on-surface">{user.name}</h4>
+
+                {/* Email */}
+                <p className="text-sm text-gray-500 truncate">{user.email}</p>
+
+                {/* Created At */}
+                <p className="text-xs text-gray-400">
+                  {new Date(user.createdAt).toLocaleDateString()}
+                </p>
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className="overflow-x-auto border border-outline rounded-md shadow-md bg-surface">
