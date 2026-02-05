@@ -1,5 +1,6 @@
 import FriendCard from "@/components/FriendCard";
-import { userStats, callLogs, messages } from "@/lib/dashboardData";
+import { userStats, callLogs, mockMails } from "@/lib/dashboardData";
+import { ArrowBigRight } from "lucide-react";
 import Link from "next/link";
 
 export default function DashboardPage() {
@@ -24,26 +25,39 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Messages Section */}
-        <div className="bg-surface p-4 rounded-md flex flex-col">
+        <div className="bg-surface p-4 rounded-md flex flex-col border border-outline">
           <div className="text-on-surface font-bold text-2xl mb-4">Recent</div>
           <div className="flex flex-col gap-4">
-            {messages.slice(0, 3).map((msg) => (
+            {mockMails.slice(0, 3).map((mail) => (
               <div
-                key={msg.id}
-                className="h-24 p-4 rounded-md shadow-md bg-container hover:bg-container-hover border border-container-border transition cursor-pointer"
-                title={`From: ${msg.from}`}
+                key={mail.id}
+                className="h-24 p-4 rounded-md bg-container hover:bg-container-hover border border-outline transition cursor-pointer group flex justify-between items-center"
+                title={`From: ${mail.from}`}
               >
-                <h4 className="font-semibold text-on-container">
-                  {msg.subject}
-                </h4>
-                <p className="text-sm text-on-container/50">{msg.from}</p>
-                <p className="text-sm text-on-container/70">{msg.date}</p>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-semibold text-on-container group-hover:text-primary transition-colors truncate">
+                    {mail.subject}
+                  </h4>
+                  <p className="text-sm text-on-container/60 truncate">
+                    {mail.from}
+                  </p>
+                  <p className="text-xs text-on-container/40 mt-1">
+                    {new Date(mail.date).toLocaleDateString()}
+                  </p>
+                </div>
+
+                <Link
+                  href={`/mails/${mail.id}`}
+                  className="p-2 cursor-pointer rounded-md bg-surface hover:bg-surface-hover transition"
+                >
+                  <ArrowBigRight className="w-5 h-5 text-on-surface" />
+                </Link>
               </div>
             ))}
           </div>
           <Link
-            href="/messages"
-            className="mt-4 text-center py-2 text-sm font-medium text-on-ghost bg-ghost hover:bg-ghost-hover border border-ghost-border rounded transition"
+            href="/mails"
+            className="mt-4 text-center py-2 text-sm font-medium text-on-ghost bg-ghost hover:bg-ghost-hover border border-outline rounded transition"
           >
             Show all
           </Link>

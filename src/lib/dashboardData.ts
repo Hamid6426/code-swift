@@ -14,13 +14,6 @@ export type CallLog = {
   date: string;
 };
 
-export type MockMessage = {
-  id: number;
-  from: string;
-  subject: string;
-  date: string;
-};
-
 export type Message = {
   id: string;
   from: string;
@@ -81,12 +74,116 @@ export const callLogs: CallLog[] = [
   },
 ];
 
-export const messages: MockMessage[] = [
-  { id: 1, from: "Alice", subject: "Meeting Reminder", date: "2026-02-05" },
-  { id: 2, from: "Bob", subject: "Project Update", date: "2026-02-04" },
-  { id: 3, from: "Charlie", subject: "Call Schedule", date: "2026-02-03" },
-  { id: 4, from: "David", subject: "New Task Assigned", date: "2026-02-02" },
-  { id: 5, from: "Eve", subject: "Weekly Report", date: "2026-02-01" },
+export interface MockMail {
+  id: number;
+  from: string;
+  subject: string;
+  date: string;
+  body: string;
+}
+
+// src/lib/dashboardData.ts
+
+export const mockMails: MockMail[] = [
+  {
+    id: 1,
+    from: "alice@codeswift.com",
+    subject: "Meeting Reminder: Sprint Planning",
+    date: "2026-02-05",
+    body: `Hi Team,
+
+Just a quick reminder that our Sprint Planning session is scheduled for today at 10:00 AM.
+
+Agenda:
+1. Review previous sprint velocity
+2. Estimate new tickets in the backlog
+3. Assign tasks for the upcoming cycle
+4. Discuss potential blockers
+
+Please ensure your Jira boards are up to date before the meeting starts.
+
+Best regards,
+Alice`,
+  },
+  {
+    id: 2,
+    from: "bob.dev@codeswift.com",
+    subject: "Project Update: Sidebar Refactor",
+    date: "2026-02-04",
+    body: `Hello,
+
+I've completed the refactor of the Sidebar component. 
+
+Key changes:
+- Removed Zustand persist middleware as requested.
+- Set the default state to collapsed.
+- Updated the theme colors to use the new Lavender-Amethyst variables.
+- Cleaned up the TypeScript interfaces for SidebarItems.
+
+The changes are now live in the 'feature/sidebar-cleanup' branch. 
+Please review the PR when you have a moment.
+
+Thanks,
+Bob`,
+  },
+  {
+    id: 3,
+    from: "charlie.support@codeswift.com",
+    subject: "Call Schedule: Client Demo",
+    date: "2026-02-03",
+    body: `Hi everyone,
+
+The client demo is officially confirmed for this Friday at 3:00 PM.
+
+We need to showcase:
+- The new dashboard layout.
+- Real-time notification updates.
+- The infinite scroll implementation in the notification center.
+
+I will set up a dry run tomorrow afternoon to ensure everything is working smoothly.
+
+Cheers,
+Charlie`,
+  },
+  {
+    id: 4,
+    from: "david.manager@codeswift.com",
+    subject: "New Task Assigned: Infinite Scroll",
+    date: "2026-02-02",
+    body: `Team,
+
+A new high-priority task has been assigned regarding the Notifications page.
+
+Requirements:
+- Implement Infinite Scrolling using the Intersection Observer API.
+- Show skeleton loaders during data fetching.
+- Add a 1.5s artificial delay to simulate real-world network latency and show off the animations.
+- Ensure it integrates with the existing search functionality.
+
+Check the technical documentation in the 'docs' folder for the specific API endpoints.
+
+Regards,
+David`,
+  },
+  {
+    id: 5,
+    from: "eve.hr@codeswift.com",
+    subject: "Weekly Report: Team Performance",
+    date: "2026-02-01",
+    body: `Dear Team,
+
+Please find the weekly performance metrics report attached.
+
+Summary:
+- Productivity increased by 15% compared to last week.
+- Bug resolution time has dropped significantly.
+- High engagement on the new CodeSwift platform.
+
+Keep up the great work! If you have any questions regarding the stats, feel free to reach out.
+
+Best,
+Eve`,
+  },
 ];
 
 export const chat = [
